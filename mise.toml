@@ -1,2 +1,9 @@
 [tools]
 ruby = "4.0.5"
+
+[tasks.setup]
+description = "Install bundler, gems, and prepare the database"
+run = [
+  "gem install bundler:4.0.18",
+  "bin/setup --skip-server",
+]

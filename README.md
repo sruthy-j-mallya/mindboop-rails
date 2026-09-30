@@ -1,24 +1,17 @@
-# README
+# MindBoop API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 8 API backend for the MindBoop Tauri app.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+```bash
+mise install
+bundle install
+bin/rails db:prepare
+bin/rails server        # http://localhost:3000
+bin/rails test
+```
 
-* System dependencies
+## Authentication
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+JWT bearer auth under `/api/v1/auth`. See [docs/authentication.md](docs/authentication.md) for endpoints, token details and how to protect controllers.

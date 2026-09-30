@@ -17,7 +17,7 @@ module Authentication
     def authenticate!
       token = request.authorization.to_s[/\ABearer (.+)\z/, 1]
       payload = JsonWebToken.decode(token.to_s)
-      @current_user = User.find_by(id: payload["user_id"])
+      @current_user = User.find_by(id: payload["sub"])
       render_unauthorized("invalid_token") unless @current_user
     rescue JsonWebToken::InvalidToken
       render_unauthorized("invalid_token")

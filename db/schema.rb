@@ -10,26 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_30_083346) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_01_141321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "refresh_tokens", force: :cascade do |t|
-    t.datetime "created_at", null: false
+  create_table "refresh_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "token_digest", null: false
     t.datetime "expires_at", null: false
     t.datetime "revoked_at"
-    t.string "token_digest", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.index ["token_digest"], name: "index_refresh_tokens_on_token_digest", unique: true
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "email", null: false
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.string "email", null: false
     t.string "password_digest", null: false
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
